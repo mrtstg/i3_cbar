@@ -33,5 +33,9 @@ json Block::get_json() {
             break;
     }
 
+    if (min_width != 0) {
+        obj["min_width"] = min_width;
+    }
+
     return obj;
 }
