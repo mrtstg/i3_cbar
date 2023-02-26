@@ -71,3 +71,25 @@ json brightness_block() {
     block.full_text = full_text;
     return block.get_json();
 }
+
+json battery_block() {
+    using std::string;
+    Block block;
+    uint32_t percentage = static_cast<uint32_t>(
+        std::stoul(
+            exec("cat /sys/class/power_supply/BAT0/capacity")
+        )
+    );
+
+    string status = exec(
+        "cat /sys/class/power_supply/BAT0/status"
+    );
+    bool charging = status == "Charging";
+
+    if (percentage < 15) {
+        block.color = "#ff0000";
+    }
+
+    block.full_text = "B: " + std::to_string(percentage) + "%" + (charging ? "[C]" : "");
+    return block.get_json();
+}
