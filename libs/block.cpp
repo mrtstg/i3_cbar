@@ -1,5 +1,9 @@
 #include "block.h"
 
+Block::Block() {
+    full_text = "";
+}
+
 Block::Block(std::string full_text_v) {
     full_text = full_text_v;
 }

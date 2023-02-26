@@ -18,6 +18,7 @@ struct Block {
     std::string color = "";
     Align align = Align::undefined;
 
+    Block();
     Block(std::string full_text_v);
     json get_json();
 };
