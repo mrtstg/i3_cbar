@@ -16,3 +16,22 @@ Bar shows:
 - Battery level
 
 Bar updates every 250 ms. (about 4 times in second)
+
+## How to build
+
+1. Pull JSON library
+
+```
+make libs
+```
+
+2. Build!
+
+```
+make build
+```
+
+## Programs which bar uses for getting info
+
+- amixer
+- brightnessctl
