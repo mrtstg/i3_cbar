@@ -37,3 +37,37 @@ json volume_block() {
     volume_block.align = Align::center;
     return volume_block.get_json();
 }
+
+json brightness_block() {
+    using std::string;
+    Block block;
+
+    uint32_t current = static_cast<uint32_t>(
+        std::stoul(
+            exec("brightnessctl get")
+        )
+    );
+
+    double max = static_cast<double>(
+        std::stoul(
+            exec("brightnessctl max")
+        )
+    );
+
+    int32_t percentage = static_cast<int32_t>(
+        (current / max) * 10
+    );
+
+    block.short_text = std::to_string(
+        static_cast<int32_t>((current / max) * 100)
+    ) + "%";
+    string full_text;
+    for (size_t i = 0; i < percentage; i++) {
+        full_text += "=";
+    }
+    for (size_t i = 0; i < 10 - percentage; i++) {
+        full_text += "-";
+    }
+    block.full_text = full_text;
+    return block.get_json();
+}
